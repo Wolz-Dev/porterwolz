@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Player from './components/Player/Player'
 
-function App() {
+function App(props) {
   const [songs] = useState([
     {
       title: "Sad machine",
@@ -40,11 +40,14 @@ function App() {
         return currentSongIndex + 1;
       }
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    /* // eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [currentSongIndex]);
 
   return (
-    <div className="App">
+    <div className="App" style={{
+      background: `url(${[props.currentSongIndex].img_src})`,
+
+    }}>
       <Player
         currentSongIndex={currentSongIndex}
         setCurrentSongIndex={setCurrentSongIndex}

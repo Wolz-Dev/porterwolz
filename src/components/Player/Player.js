@@ -41,12 +41,20 @@ function Player(props) {
     }
 
     return (
-        <div className="c-player">
+        <div className="c-player" style={{
+            backgroundImage: `url(${props.songs[props.currentSongIndex].img_src})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            borderImage: 'url("https://c.tenor.com/tvy7-DsfRQEAAAAd/look-at-the-sky-porter-robinson.gif")',
+        }}>
             <audio src={props.songs[props.currentSongIndex].src} ref={audioEl}></audio>
-            <h4>Playing now</h4>
-            <Details song={props.songs[props.currentSongIndex]} />
-            <Controls isPlaying={isPlaying} setIsPlaying={setIsPlaying} SkipSong={SkipSong} />
-            <p>Next up: <span>{props.songs[props.nextSongIndex].title} by {props.songs[props.nextSongIndex].artist}</span></p>
+            <div className="margt"></div>
+            <div className="container2">
+                <Details song={props.songs[props.currentSongIndex]} />
+                <Controls isPlaying={isPlaying} setIsPlaying={setIsPlaying} SkipSong={SkipSong} />
+                <p className="ctm">Next up: <span>{props.songs[props.nextSongIndex].title} by {props.songs[props.nextSongIndex].artist}</span></p>
+            </div>
         </div>
     )
 }
