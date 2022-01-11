@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import Controls from './Controls';
 import Details from './Details';
 
-function Player(props) {
+function Player({ currentSongIndex, setCurrentSongIndex, nextSongIndex, songs }) {
     const audioEl = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -16,23 +16,23 @@ function Player(props) {
 
     const SkipSong = (forwards = true) => {
         if (forwards) {
-            props.setCurrentSongIndex(() => {
-                let temp = props.currentSongIndex;
+            setCurrentSongIndex(() => {
+                let temp = currentSongIndex;
                 temp++;
 
-                if (temp > props.songs.length - 1) {
+                if (temp > songs.length - 1) {
                     temp = 0;
                 }
 
                 return temp;
             });
         } else {
-            props.setCurrentSongIndex(() => {
-                let temp = props.currentSongIndex;
+            setCurrentSongIndex(() => {
+                let temp = currentSongIndex;
                 temp--;
 
                 if (temp < 0) {
-                    temp = props.songs.length - 1;
+                    temp = songs.length - 1;
                 }
 
                 return temp;
@@ -42,18 +42,18 @@ function Player(props) {
 
     return (
         <div className="c-player" style={{
-            backgroundImage: `url(${props.songs[props.currentSongIndex].img_src})`,
+            backgroundImage: `url(${songs[currentSongIndex].img_src})`,
             backgroundPosition: 'center',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             borderImage: 'url("https://c.tenor.com/tvy7-DsfRQEAAAAd/look-at-the-sky-porter-robinson.gif")',
         }}>
-            <audio src={props.songs[props.currentSongIndex].src} ref={audioEl}></audio>
+            <audio src={songs[currentSongIndex].src} ref={audioEl}></audio>
             <div className="margt"></div>
             <div className="container2">
-                <Details song={props.songs[props.currentSongIndex]} />
+                <Details song={songs[currentSongIndex]} />
                 <Controls isPlaying={isPlaying} setIsPlaying={setIsPlaying} SkipSong={SkipSong} />
-                <p className="ctm">Next up: <span>{props.songs[props.nextSongIndex].title} by {props.songs[props.nextSongIndex].artist}</span></p>
+                <p className="ctm">Next up: <span>{songs[nextSongIndex].title} by {songs[nextSongIndex].artist}</span></p>
             </div>
         </div>
     )

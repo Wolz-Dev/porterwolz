@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Player from './components/Player/Player'
 
-function App(props) {
+function App() {
   const [songs] = useState([
     {
       title: "Sad machine",
@@ -45,7 +45,7 @@ function App(props) {
 
   return (
     <div className="App" style={{
-      background: `url(${[props.currentSongIndex].img_src})`,
+      background: `url(${[currentSongIndex].img_src})`,
 
     }}>
       <Player
